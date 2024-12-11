@@ -1,18 +1,28 @@
 
 package GUI;
 
+import BaseDatos.UsuariosRegistrados;
+import RolesUsuario.Estudiante;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 public class PrincipalEstudiantes extends javax.swing.JFrame {
 
-    int indiceAdmin;
-
+    Estudiante estudianteActual;
+    DefaultTableModel modelo = new DefaultTableModel();
     public PrincipalEstudiantes() {
     }
     
     
-    public PrincipalEstudiantes(int indiceAdmin) {
+    public PrincipalEstudiantes(int indiceEstudiante) {
         initComponents();
         this.setLocationRelativeTo(null);
-        this.indiceAdmin = indiceAdmin;
+        jblUbicacion.setText("ESTUDIANTES");
+        estudianteActual = UsuariosRegistrados.listaEstudiantesRegistrados.get(indiceEstudiante);
+        modelo.addColumn("Nombre Completo");
+        modelo.addColumn("Edad");
+        modelo.addColumn("Carrera");
+        tablaEstudiantes.setModel(modelo);
     }
 
     /**
@@ -24,21 +34,254 @@ public class PrincipalEstudiantes extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        background = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        jblUbicacion = new javax.swing.JLabel();
+        pizarraOpciones = new javax.swing.JTabbedPane();
+        panelInicio = new javax.swing.JPanel();
+        btnVerDatos = new javax.swing.JButton();
+        btnVerEstudiantes = new javax.swing.JButton();
+        btnAtrasInicio = new javax.swing.JButton();
+        panelVerDatos = new javax.swing.JPanel();
+        jblNombre = new javax.swing.JLabel();
+        jblEdad = new javax.swing.JLabel();
+        jblCarrera = new javax.swing.JLabel();
+        jblUsuario = new javax.swing.JLabel();
+        jblPassword = new javax.swing.JLabel();
+        btnAtrasVerDatos = new javax.swing.JButton();
+        txtPassword = new javax.swing.JPasswordField();
+        txtCarrera = new javax.swing.JTextField();
+        txtNombre = new javax.swing.JTextField();
+        txtEdad = new javax.swing.JTextField();
+        txtUser = new javax.swing.JTextField();
+        panelVerEstudiantes = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tablaEstudiantes = new javax.swing.JTable();
+        btnAtrasVerEstudiantes = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        background.setBackground(new java.awt.Color(255, 255, 204));
+        background.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel2.setBackground(new java.awt.Color(102, 102, 0));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jblUbicacion.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
+        jblUbicacion.setForeground(new java.awt.Color(255, 255, 255));
+        jblUbicacion.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jblUbicacion.setText("ESTUDIANTES");
+        jPanel2.add(jblUbicacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1060, 70));
+
+        background.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1060, 70));
+
+        pizarraOpciones.setBackground(new java.awt.Color(204, 204, 204));
+        pizarraOpciones.setForeground(new java.awt.Color(102, 102, 102));
+
+        panelInicio.setBackground(new java.awt.Color(255, 255, 204));
+        panelInicio.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btnVerDatos.setBackground(new java.awt.Color(102, 102, 0));
+        btnVerDatos.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
+        btnVerDatos.setForeground(new java.awt.Color(255, 255, 255));
+        btnVerDatos.setText("VER MIS DATOS");
+        btnVerDatos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVerDatosActionPerformed(evt);
+            }
+        });
+        panelInicio.add(btnVerDatos, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 180, 480, 80));
+
+        btnVerEstudiantes.setBackground(new java.awt.Color(102, 102, 0));
+        btnVerEstudiantes.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
+        btnVerEstudiantes.setForeground(new java.awt.Color(255, 255, 255));
+        btnVerEstudiantes.setText("VER ESTUDIANTES");
+        btnVerEstudiantes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVerEstudiantesActionPerformed(evt);
+            }
+        });
+        panelInicio.add(btnVerEstudiantes, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 340, 480, 80));
+
+        btnAtrasInicio.setBackground(new java.awt.Color(102, 102, 0));
+        btnAtrasInicio.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        btnAtrasInicio.setForeground(new java.awt.Color(255, 255, 255));
+        btnAtrasInicio.setText("Atras");
+        btnAtrasInicio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAtrasInicioActionPerformed(evt);
+            }
+        });
+        panelInicio.add(btnAtrasInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 20, 120, 50));
+
+        pizarraOpciones.addTab("tab1", panelInicio);
+
+        panelVerDatos.setBackground(new java.awt.Color(255, 255, 204));
+        panelVerDatos.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jblNombre.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jblNombre.setForeground(new java.awt.Color(51, 51, 51));
+        jblNombre.setText("Nombre:");
+        panelVerDatos.add(jblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, 200, -1));
+
+        jblEdad.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jblEdad.setForeground(new java.awt.Color(51, 51, 51));
+        jblEdad.setText("Edad:");
+        panelVerDatos.add(jblEdad, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, 190, -1));
+
+        jblCarrera.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jblCarrera.setForeground(new java.awt.Color(51, 51, 51));
+        jblCarrera.setText("Carrera:");
+        panelVerDatos.add(jblCarrera, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 520, 190, -1));
+
+        jblUsuario.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jblUsuario.setForeground(new java.awt.Color(51, 51, 51));
+        jblUsuario.setText("Usuario:");
+        panelVerDatos.add(jblUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 280, 190, -1));
+
+        jblPassword.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jblPassword.setForeground(new java.awt.Color(51, 51, 51));
+        jblPassword.setText("Password:");
+        panelVerDatos.add(jblPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 400, 190, -1));
+
+        btnAtrasVerDatos.setBackground(new java.awt.Color(102, 102, 0));
+        btnAtrasVerDatos.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        btnAtrasVerDatos.setForeground(new java.awt.Color(255, 255, 255));
+        btnAtrasVerDatos.setText("Atras");
+        btnAtrasVerDatos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAtrasVerDatosActionPerformed(evt);
+            }
+        });
+        panelVerDatos.add(btnAtrasVerDatos, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 20, 120, 50));
+
+        txtPassword.setEditable(false);
+        txtPassword.setBackground(new java.awt.Color(255, 255, 204));
+        txtPassword.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        txtPassword.setForeground(new java.awt.Color(51, 51, 51));
+        txtPassword.setText("password");
+        txtPassword.setBorder(null);
+        panelVerDatos.add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 400, 580, 50));
+
+        txtCarrera.setEditable(false);
+        txtCarrera.setBackground(new java.awt.Color(255, 255, 204));
+        txtCarrera.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        txtCarrera.setForeground(new java.awt.Color(51, 51, 51));
+        txtCarrera.setText("carrera");
+        txtCarrera.setBorder(null);
+        panelVerDatos.add(txtCarrera, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 520, 630, 50));
+
+        txtNombre.setEditable(false);
+        txtNombre.setBackground(new java.awt.Color(255, 255, 204));
+        txtNombre.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        txtNombre.setForeground(new java.awt.Color(51, 51, 51));
+        txtNombre.setText("nombre");
+        txtNombre.setBorder(null);
+        panelVerDatos.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 30, 630, 60));
+
+        txtEdad.setEditable(false);
+        txtEdad.setBackground(new java.awt.Color(255, 255, 204));
+        txtEdad.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        txtEdad.setForeground(new java.awt.Color(51, 51, 51));
+        txtEdad.setText("edad");
+        txtEdad.setBorder(null);
+        panelVerDatos.add(txtEdad, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 160, 630, 50));
+
+        txtUser.setEditable(false);
+        txtUser.setBackground(new java.awt.Color(255, 255, 204));
+        txtUser.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        txtUser.setForeground(new java.awt.Color(51, 51, 51));
+        txtUser.setText("user");
+        txtUser.setBorder(null);
+        panelVerDatos.add(txtUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 280, 630, 50));
+
+        pizarraOpciones.addTab("tab2", panelVerDatos);
+
+        panelVerEstudiantes.setBackground(new java.awt.Color(255, 255, 204));
+        panelVerEstudiantes.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        tablaEstudiantes.setBackground(new java.awt.Color(204, 204, 204));
+        tablaEstudiantes.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        tablaEstudiantes.setForeground(new java.awt.Color(51, 51, 51));
+        tablaEstudiantes.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane1.setViewportView(tablaEstudiantes);
+
+        panelVerEstudiantes.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 40, 740, 530));
+
+        btnAtrasVerEstudiantes.setBackground(new java.awt.Color(102, 102, 0));
+        btnAtrasVerEstudiantes.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        btnAtrasVerEstudiantes.setForeground(new java.awt.Color(255, 255, 255));
+        btnAtrasVerEstudiantes.setText("Atras");
+        btnAtrasVerEstudiantes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAtrasVerEstudiantesActionPerformed(evt);
+            }
+        });
+        panelVerEstudiantes.add(btnAtrasVerEstudiantes, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 20, 120, 50));
+
+        pizarraOpciones.addTab("tab3", panelVerEstudiantes);
+
+        background.add(pizarraOpciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 1060, 650));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(background, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(background, javax.swing.GroupLayout.DEFAULT_SIZE, 685, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnVerDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerDatosActionPerformed
+        jblUbicacion.setText("MIS DATOS");
+        pizarraOpciones.setSelectedIndex(1);
+        txtNombre.setText(estudianteActual.getNombreCompleto());
+        txtEdad.setText(estudianteActual.getEdad()+" años");
+        txtUser.setText(estudianteActual.getUsuario());
+        txtPassword.setText(estudianteActual.getPassword());
+        txtCarrera.setText(estudianteActual.getCarrera());
+    }//GEN-LAST:event_btnVerDatosActionPerformed
+
+    private void btnAtrasVerDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasVerDatosActionPerformed
+        pizarraOpciones.setSelectedIndex(0);
+        jblUbicacion.setText("ESTUDIANTES");
+    }//GEN-LAST:event_btnAtrasVerDatosActionPerformed
+
+    private void btnAtrasInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasInicioActionPerformed
+        Login log = new Login();
+        log.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnAtrasInicioActionPerformed
+
+    private void btnVerEstudiantesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerEstudiantesActionPerformed
+        pizarraOpciones.setSelectedIndex(2);
+        jblUbicacion.setText("ESTUDIANTES REGISTRADOS");
+        try {
+            modelo.setRowCount(0);
+            for(Estudiante i : UsuariosRegistrados.getListaEstudiantesRegistrados()){
+                modelo.addRow(new Object[]{i.getNombreCompleto(), i.getEdad(), i.getCarrera()});
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error llenado la tabla");
+        }
+    }//GEN-LAST:event_btnVerEstudiantesActionPerformed
+
+    private void btnAtrasVerEstudiantesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasVerEstudiantesActionPerformed
+        pizarraOpciones.setSelectedIndex(0);
+        jblUbicacion.setText("ESTUDIANTES");
+    }//GEN-LAST:event_btnAtrasVerEstudiantesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -76,5 +319,29 @@ public class PrincipalEstudiantes extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel background;
+    private javax.swing.JButton btnAtrasInicio;
+    private javax.swing.JButton btnAtrasVerDatos;
+    private javax.swing.JButton btnAtrasVerEstudiantes;
+    private javax.swing.JButton btnVerDatos;
+    private javax.swing.JButton btnVerEstudiantes;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel jblCarrera;
+    private javax.swing.JLabel jblEdad;
+    private javax.swing.JLabel jblNombre;
+    private javax.swing.JLabel jblPassword;
+    private javax.swing.JLabel jblUbicacion;
+    private javax.swing.JLabel jblUsuario;
+    private javax.swing.JPanel panelInicio;
+    private javax.swing.JPanel panelVerDatos;
+    private javax.swing.JPanel panelVerEstudiantes;
+    private javax.swing.JTabbedPane pizarraOpciones;
+    private javax.swing.JTable tablaEstudiantes;
+    private javax.swing.JTextField txtCarrera;
+    private javax.swing.JTextField txtEdad;
+    private javax.swing.JTextField txtNombre;
+    private javax.swing.JPasswordField txtPassword;
+    private javax.swing.JTextField txtUser;
     // End of variables declaration//GEN-END:variables
 }

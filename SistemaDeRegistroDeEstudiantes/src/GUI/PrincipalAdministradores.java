@@ -1,18 +1,108 @@
-
 package GUI;
 
+import BaseDatos.DatosUnicosUsados;
+import BaseDatos.UsuariosRegistrados;
+import RolesUsuario.Estudiante;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 public class PrincipalAdministradores extends javax.swing.JFrame {
 
     int indiceAdmin;
+    DefaultTableModel modeloRegistrados = new DefaultTableModel();
+    DefaultTableModel modeloEliminar = new DefaultTableModel();
 
     public PrincipalAdministradores() {
     }
-    
+
     public PrincipalAdministradores(int indiceAdmin) {
         initComponents();
         this.setLocationRelativeTo(null);
         this.indiceAdmin = indiceAdmin;
+
+        modeloRegistrados.addColumn("Nombre Completo");
+        modeloRegistrados.addColumn("Edad");
+        modeloRegistrados.addColumn("Carrera");
+        tablaEstudiantesRegistrados.setModel(modeloRegistrados);
+
+        modeloEliminar.addColumn("Nombre Completo");
+        modeloEliminar.addColumn("Edad");
+        modeloEliminar.addColumn("Carrera");
+        tablaEliminar.setModel(modeloEliminar);
+    }
+
+    public void textosPorDefecto() {
+        txtEdad.setText("");
+        txtNombre.setText("");
+        txtPassword.setText("");
+        txtUser.setText("");
+        cbCarrera.setSelectedIndex(0);
+    }
+
+    public void ajustarTextos() {
+        txtEdad.setText(txtEdad.getText().trim());
+        txtNombre.setText(txtNombre.getText().trim());
+        txtPassword.setText(String.valueOf(txtPassword.getPassword()).trim());
+        txtUser.setText(txtUser.getText().trim());
+        cbCarrera.setSelectedIndex(0);
+    }
+
+    public boolean validarEspaciosEnBlanco() {
+        boolean espaciosLLenos = false;
+        try {
+
+            if (!txtNombre.getText().trim().equals("") || !txtEdad.getText().trim().equals("") || !txtUser.getText().trim().equals("") || !String.valueOf(txtPassword.getPassword()).trim().equals("")) {
+                espaciosLLenos = true;
+            } else {
+                JOptionPane.showMessageDialog(null, "Error, rellena todos los espacios");
+                ajustarTextos();
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error validando espacios llenos");
+        }
+        return espaciosLLenos;
+    }
+
+    public boolean validarPassword() {
+        boolean passwordValida = false;
+
+        try {
+            if (String.valueOf(txtPassword.getPassword()).length() >= 8) {
+                if (DatosUnicosUsados.getPasswordsEnUso().contains(String.valueOf(txtPassword.getPassword()))) {
+                    JOptionPane.showMessageDialog(null, "Error, este password ya esta en uso");
+                    ajustarTextos();
+                } else {
+                    passwordValida = true;
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Error, el password debe tener minimo 8 caracteres");
+                ajustarTextos();
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error validando password");
+        }
+
+        return passwordValida;
+    }
+
+    public void agregarEstudiante(boolean espaciosLlenos, boolean passwordValida) {
+
+        try {
+            if (espaciosLlenos == true && passwordValida == true) {
+                Estudiante estudiante = new Estudiante(String.valueOf(cbCarrera.getSelectedItem()), txtNombre.getText(), Integer.valueOf(txtEdad.getText()),
+                        txtUser.getText(), String.valueOf(txtPassword.getPassword()), "Estudiante");
+
+                UsuariosRegistrados.getListaEstudiantesRegistrados().add(estudiante);
+                DatosUnicosUsados.getPasswordsEnUso().add(estudiante.getPassword());
+
+                JOptionPane.showMessageDialog(null, "Estudiante agregado, puedes visualizarlo en la opcion visualizar");
+                textosPorDefecto();
+                pizarraOpciones.setSelectedIndex(0);
+                jblUbicacion.setText("ADMINISTRADORES");
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error agregando estudiante");
+        }
     }
 
     /**
@@ -24,21 +114,382 @@ public class PrincipalAdministradores extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        background = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        jblUbicacion = new javax.swing.JLabel();
+        pizarraOpciones = new javax.swing.JTabbedPane();
+        panelInicio = new javax.swing.JPanel();
+        btnEliminar = new javax.swing.JButton();
+        btnAgregar = new javax.swing.JButton();
+        btnVisualizar = new javax.swing.JButton();
+        btnAtrasPrincipal = new javax.swing.JButton();
+        panelAgregar = new javax.swing.JPanel();
+        jblNombre = new javax.swing.JLabel();
+        jblEdad = new javax.swing.JLabel();
+        jblCarrera = new javax.swing.JLabel();
+        jblUsuario = new javax.swing.JLabel();
+        jblPassword = new javax.swing.JLabel();
+        btnAtrasVerDatos = new javax.swing.JButton();
+        txtPassword = new javax.swing.JPasswordField();
+        txtNombre = new javax.swing.JTextField();
+        txtEdad = new javax.swing.JTextField();
+        txtUser = new javax.swing.JTextField();
+        cbCarrera = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
+        btnAgregarEstudiante = new javax.swing.JButton();
+        jblAlerta = new javax.swing.JLabel();
+        panelVisualizar = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tablaEstudiantesRegistrados = new javax.swing.JTable();
+        btnAtrasVisualizar = new javax.swing.JButton();
+        panelEliminar = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tablaEliminar = new javax.swing.JTable();
+        btnEliminarEstudiante = new javax.swing.JButton();
+        btnAtrasEliminar = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        background.setBackground(new java.awt.Color(255, 255, 204));
+        background.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel2.setBackground(new java.awt.Color(102, 102, 0));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jblUbicacion.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jblUbicacion.setForeground(new java.awt.Color(255, 255, 255));
+        jblUbicacion.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jblUbicacion.setText("ADMINISTRADORES");
+        jPanel2.add(jblUbicacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1060, 60));
+
+        background.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1060, 60));
+
+        pizarraOpciones.setBackground(new java.awt.Color(204, 204, 204));
+        pizarraOpciones.setForeground(new java.awt.Color(102, 102, 102));
+
+        panelInicio.setBackground(new java.awt.Color(255, 255, 204));
+        panelInicio.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btnEliminar.setBackground(new java.awt.Color(102, 102, 0));
+        btnEliminar.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
+        btnEliminar.setForeground(new java.awt.Color(255, 255, 255));
+        btnEliminar.setText("ELIMINAR ESTUDIANTE");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
+        panelInicio.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 430, 660, 80));
+
+        btnAgregar.setBackground(new java.awt.Color(102, 102, 0));
+        btnAgregar.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
+        btnAgregar.setForeground(new java.awt.Color(255, 255, 255));
+        btnAgregar.setText("AGREGAR ESTUDIANTE");
+        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarActionPerformed(evt);
+            }
+        });
+        panelInicio.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 130, 660, 80));
+
+        btnVisualizar.setBackground(new java.awt.Color(102, 102, 0));
+        btnVisualizar.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
+        btnVisualizar.setForeground(new java.awt.Color(255, 255, 255));
+        btnVisualizar.setText("VISUALIZAR ESTUDIANTES");
+        btnVisualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVisualizarActionPerformed(evt);
+            }
+        });
+        panelInicio.add(btnVisualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 280, 660, 80));
+
+        btnAtrasPrincipal.setBackground(new java.awt.Color(102, 102, 0));
+        btnAtrasPrincipal.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        btnAtrasPrincipal.setForeground(new java.awt.Color(255, 255, 255));
+        btnAtrasPrincipal.setText("Atras");
+        btnAtrasPrincipal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAtrasPrincipalActionPerformed(evt);
+            }
+        });
+        panelInicio.add(btnAtrasPrincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 20, 120, 50));
+
+        pizarraOpciones.addTab("tab1", panelInicio);
+
+        panelAgregar.setBackground(new java.awt.Color(255, 255, 204));
+        panelAgregar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jblNombre.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jblNombre.setForeground(new java.awt.Color(51, 51, 51));
+        jblNombre.setText("Nombre:");
+        panelAgregar.add(jblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 200, 200, -1));
+
+        jblEdad.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jblEdad.setForeground(new java.awt.Color(51, 51, 51));
+        jblEdad.setText("Edad:");
+        panelAgregar.add(jblEdad, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 290, 190, -1));
+
+        jblCarrera.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jblCarrera.setForeground(new java.awt.Color(51, 51, 51));
+        jblCarrera.setText("Carrera:");
+        panelAgregar.add(jblCarrera, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, 190, -1));
+
+        jblUsuario.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jblUsuario.setForeground(new java.awt.Color(51, 51, 51));
+        jblUsuario.setText("Usuario:");
+        panelAgregar.add(jblUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 380, 190, -1));
+
+        jblPassword.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jblPassword.setForeground(new java.awt.Color(51, 51, 51));
+        jblPassword.setText("Password:");
+        panelAgregar.add(jblPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 470, 190, -1));
+
+        btnAtrasVerDatos.setBackground(new java.awt.Color(102, 102, 0));
+        btnAtrasVerDatos.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        btnAtrasVerDatos.setForeground(new java.awt.Color(255, 255, 255));
+        btnAtrasVerDatos.setText("Atras");
+        btnAtrasVerDatos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAtrasVerDatosActionPerformed(evt);
+            }
+        });
+        panelAgregar.add(btnAtrasVerDatos, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 20, 120, 50));
+
+        txtPassword.setBackground(new java.awt.Color(204, 204, 204));
+        txtPassword.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        txtPassword.setForeground(new java.awt.Color(51, 51, 51));
+        panelAgregar.add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 470, 600, 50));
+
+        txtNombre.setBackground(new java.awt.Color(204, 204, 204));
+        txtNombre.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        txtNombre.setForeground(new java.awt.Color(51, 51, 51));
+        panelAgregar.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 200, 600, 50));
+
+        txtEdad.setBackground(new java.awt.Color(204, 204, 204));
+        txtEdad.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        txtEdad.setForeground(new java.awt.Color(51, 51, 51));
+        txtEdad.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtEdadKeyTyped(evt);
+            }
+        });
+        panelAgregar.add(txtEdad, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 290, 600, 50));
+
+        txtUser.setBackground(new java.awt.Color(204, 204, 204));
+        txtUser.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        txtUser.setForeground(new java.awt.Color(51, 51, 51));
+        panelAgregar.add(txtUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 380, 600, 50));
+
+        cbCarrera.setBackground(new java.awt.Color(204, 204, 204));
+        cbCarrera.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        cbCarrera.setForeground(new java.awt.Color(51, 51, 51));
+        cbCarrera.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Informatica", "Electronica", "Diseño" }));
+        panelAgregar.add(cbCarrera, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 126, 220, 40));
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("FORMULARIO");
+        panelAgregar.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 860, -1));
+
+        btnAgregarEstudiante.setBackground(new java.awt.Color(102, 102, 0));
+        btnAgregarEstudiante.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        btnAgregarEstudiante.setForeground(new java.awt.Color(255, 255, 255));
+        btnAgregarEstudiante.setText("AGREGAR");
+        btnAgregarEstudiante.setToolTipText("");
+        btnAgregarEstudiante.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarEstudianteActionPerformed(evt);
+            }
+        });
+        panelAgregar.add(btnAgregarEstudiante, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 550, 230, -1));
+
+        jblAlerta.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jblAlerta.setForeground(new java.awt.Color(255, 102, 102));
+        jblAlerta.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        panelAgregar.add(jblAlerta, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 300, 200, 30));
+
+        pizarraOpciones.addTab("tab2", panelAgregar);
+
+        panelVisualizar.setBackground(new java.awt.Color(255, 255, 204));
+        panelVisualizar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        tablaEstudiantesRegistrados.setBackground(new java.awt.Color(204, 204, 204));
+        tablaEstudiantesRegistrados.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        tablaEstudiantesRegistrados.setForeground(new java.awt.Color(51, 51, 51));
+        tablaEstudiantesRegistrados.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane1.setViewportView(tablaEstudiantesRegistrados);
+
+        panelVisualizar.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 100, 880, 490));
+
+        btnAtrasVisualizar.setBackground(new java.awt.Color(102, 102, 0));
+        btnAtrasVisualizar.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        btnAtrasVisualizar.setForeground(new java.awt.Color(255, 255, 255));
+        btnAtrasVisualizar.setText("Atras");
+        btnAtrasVisualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAtrasVisualizarActionPerformed(evt);
+            }
+        });
+        panelVisualizar.add(btnAtrasVisualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 20, 120, 50));
+
+        pizarraOpciones.addTab("tab4", panelVisualizar);
+
+        panelEliminar.setBackground(new java.awt.Color(255, 255, 204));
+        panelEliminar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        tablaEliminar.setBackground(new java.awt.Color(204, 204, 204));
+        tablaEliminar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        tablaEliminar.setForeground(new java.awt.Color(51, 51, 51));
+        tablaEliminar.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane2.setViewportView(tablaEliminar);
+
+        panelEliminar.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 90, 880, 420));
+
+        btnEliminarEstudiante.setBackground(new java.awt.Color(102, 102, 0));
+        btnEliminarEstudiante.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        btnEliminarEstudiante.setForeground(new java.awt.Color(255, 255, 255));
+        btnEliminarEstudiante.setText("ELIMINAR");
+        btnEliminarEstudiante.setToolTipText("");
+        btnEliminarEstudiante.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarEstudianteActionPerformed(evt);
+            }
+        });
+        panelEliminar.add(btnEliminarEstudiante, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 550, 230, -1));
+
+        btnAtrasEliminar.setBackground(new java.awt.Color(102, 102, 0));
+        btnAtrasEliminar.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        btnAtrasEliminar.setForeground(new java.awt.Color(255, 255, 255));
+        btnAtrasEliminar.setText("Atras");
+        btnAtrasEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAtrasEliminarActionPerformed(evt);
+            }
+        });
+        panelEliminar.add(btnAtrasEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 20, 120, 50));
+
+        pizarraOpciones.addTab("tab3", panelEliminar);
+
+        background.add(pizarraOpciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 1060, 670));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(background, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(background, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        pizarraOpciones.setSelectedIndex(3);
+        jblUbicacion.setText("ELIMINAR ESTUDIANTE");
+
+        try {
+            modeloEliminar.setRowCount(0);
+            for (Estudiante i : UsuariosRegistrados.getListaEstudiantesRegistrados()) {
+                modeloEliminar.addRow(new Object[]{i.getNombreCompleto(), i.getEdad(), i.getCarrera()});
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error llenando tabla eliminar");
+        }
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
+        textosPorDefecto();
+        pizarraOpciones.setSelectedIndex(1);
+        jblUbicacion.setText("AGREGAR ESTUDIANTE");
+    }//GEN-LAST:event_btnAgregarActionPerformed
+
+    private void btnVisualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVisualizarActionPerformed
+        pizarraOpciones.setSelectedIndex(2);
+        jblUbicacion.setText("VISUALIZAR ESTUDIANTES");
+        try {
+            modeloRegistrados.setRowCount(0);
+            for (Estudiante i : UsuariosRegistrados.getListaEstudiantesRegistrados()) {
+                modeloRegistrados.addRow(new Object[]{i.getNombreCompleto(), i.getEdad(), i.getCarrera()});
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error llenando tabal estudiantes");
+        }
+    }//GEN-LAST:event_btnVisualizarActionPerformed
+
+    private void btnAtrasVerDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasVerDatosActionPerformed
+        pizarraOpciones.setSelectedIndex(0);
+        jblUbicacion.setText("ADMINISTRADORES");
+    }//GEN-LAST:event_btnAtrasVerDatosActionPerformed
+
+    private void btnAgregarEstudianteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarEstudianteActionPerformed
+        agregarEstudiante(validarEspaciosEnBlanco(), validarPassword());
+    }//GEN-LAST:event_btnAgregarEstudianteActionPerformed
+
+    private void txtEdadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEdadKeyTyped
+        char tecla = evt.getKeyChar();
+
+        if (!Character.isDigit(tecla)) {
+            evt.consume();
+            jblAlerta.setText("Solo numeros");
+        } else {
+            jblAlerta.setText("");
+        }
+    }//GEN-LAST:event_txtEdadKeyTyped
+
+    private void btnAtrasPrincipalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasPrincipalActionPerformed
+        Login log = new Login();
+        log.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnAtrasPrincipalActionPerformed
+
+    private void btnAtrasVisualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasVisualizarActionPerformed
+        pizarraOpciones.setSelectedIndex(0);
+        jblUbicacion.setText("ADMINISTRADORES");
+    }//GEN-LAST:event_btnAtrasVisualizarActionPerformed
+
+    private void btnEliminarEstudianteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarEstudianteActionPerformed
+        try {
+            if (tablaEliminar.getSelectedRow() >= 0) {
+                int indiceEstudiante = tablaEliminar.getSelectedRow();
+                int eleccion = JOptionPane.showConfirmDialog(null, "Deseas eliminar este estudiante?", "Elije una opcion", JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
+                if (eleccion == 0) {
+                    DatosUnicosUsados.getPasswordsEnUso().remove(UsuariosRegistrados.getListaEstudiantesRegistrados().get(indiceEstudiante).getPassword());
+                    UsuariosRegistrados.getListaEstudiantesRegistrados().get(indiceEstudiante).eliminarEstudiante();
+                    
+                    JOptionPane.showMessageDialog(null, "Usuario eliminado, verifica en la opcion de visualizar");
+                    pizarraOpciones.setSelectedIndex(0);
+                    jblUbicacion.setText("ADMINISTRADORES");
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Error, debes seleccionar un estudiante para eliminar");
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error, eliminando estudiante");
+        }
+    }//GEN-LAST:event_btnEliminarEstudianteActionPerformed
+
+    private void btnAtrasEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasEliminarActionPerformed
+        pizarraOpciones.setSelectedIndex(0);
+        jblUbicacion.setText("ADMINISTRADORES");
+    }//GEN-LAST:event_btnAtrasEliminarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -77,5 +528,39 @@ public class PrincipalAdministradores extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel background;
+    private javax.swing.JButton btnAgregar;
+    private javax.swing.JButton btnAgregarEstudiante;
+    private javax.swing.JButton btnAtrasEliminar;
+    private javax.swing.JButton btnAtrasPrincipal;
+    private javax.swing.JButton btnAtrasVerDatos;
+    private javax.swing.JButton btnAtrasVisualizar;
+    private javax.swing.JButton btnEliminar;
+    private javax.swing.JButton btnEliminarEstudiante;
+    private javax.swing.JButton btnVerDatos;
+    private javax.swing.JButton btnVisualizar;
+    private javax.swing.JComboBox<String> cbCarrera;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel jblAlerta;
+    private javax.swing.JLabel jblCarrera;
+    private javax.swing.JLabel jblEdad;
+    private javax.swing.JLabel jblNombre;
+    private javax.swing.JLabel jblPassword;
+    private javax.swing.JLabel jblUbicacion;
+    private javax.swing.JLabel jblUsuario;
+    private javax.swing.JPanel panelAgregar;
+    private javax.swing.JPanel panelEliminar;
+    private javax.swing.JPanel panelInicio;
+    private javax.swing.JPanel panelVisualizar;
+    private javax.swing.JTabbedPane pizarraOpciones;
+    private javax.swing.JTable tablaEliminar;
+    private javax.swing.JTable tablaEstudiantesRegistrados;
+    private javax.swing.JTextField txtEdad;
+    private javax.swing.JTextField txtNombre;
+    private javax.swing.JPasswordField txtPassword;
+    private javax.swing.JTextField txtUser;
     // End of variables declaration//GEN-END:variables
 }

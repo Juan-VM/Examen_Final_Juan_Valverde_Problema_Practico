@@ -1,5 +1,6 @@
 package GUI;
 
+import BaseDatos.DatosUnicosUsados;
 import BaseDatos.UsuariosRegistrados;
 import RolesUsuario.Administrador;
 import RolesUsuario.Estudiante;
@@ -11,7 +12,11 @@ public class Login extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
 
-        //Personas registradas por defecto
+    }
+    
+    public static void crearUsuariosPreestablecidos(){
+        //Se ejecuta una sola vez en el main.
+
         //Estudiantes:
         Estudiante estudiante1 = new Estudiante("Informatica", "Juan Valverde Mora", 18, "Juan", "12345678", "Estudiante");
         Estudiante estudiante2 = new Estudiante("Electronica", "Adrian Mora", 20, "Adri", "helloworld", "Estudiante");
@@ -23,16 +28,23 @@ public class Login extends javax.swing.JFrame {
         Administrador admin = new Administrador("Rodolfo Diaz", 34, "Fofo", "bueno123", "Administrador");
 
         UsuariosRegistrados.getListaAdminsRegistrados().add(admin);
-
+        
+        //agregar password a passwords usadas
+        DatosUnicosUsados.getPasswordsEnUso().add(estudiante1.getPassword());
+        DatosUnicosUsados.getPasswordsEnUso().add(estudiante2.getPassword());
+        DatosUnicosUsados.getPasswordsEnUso().add(admin.getPassword());
     }
-
     public boolean validarEspaciosRellenos() {
 
         boolean espaciosLlenos = false;
         try {
 
             if (!txtUsuario.getText().trim().equals("") || !String.valueOf(txtPassword.getPassword()).trim().equals("")) {
-                espaciosLlenos = true;
+                if (String.valueOf(txtPassword.getPassword()).length() >= 8) {
+                    espaciosLlenos = true;
+                }else{
+                    JOptionPane.showMessageDialog(null, "El password debe tener 8 caracteres minimo");
+                }
             } else {
                 JOptionPane.showMessageDialog(null, "Rellena todos los espacios");
             }
@@ -111,9 +123,9 @@ public class Login extends javax.swing.JFrame {
         background.setBackground(new java.awt.Color(255, 255, 204));
         background.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnEntrar.setBackground(new java.awt.Color(204, 204, 204));
+        btnEntrar.setBackground(new java.awt.Color(102, 102, 0));
         btnEntrar.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
-        btnEntrar.setForeground(new java.awt.Color(51, 51, 51));
+        btnEntrar.setForeground(new java.awt.Color(255, 255, 255));
         btnEntrar.setText("ENTRAR");
         btnEntrar.setToolTipText("");
         btnEntrar.setBorder(null);
@@ -201,6 +213,7 @@ public class Login extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Login().setVisible(true);
+                crearUsuariosPreestablecidos();
             }
         });
     }

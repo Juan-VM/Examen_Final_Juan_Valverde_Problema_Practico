@@ -1,6 +1,9 @@
 
 package RolesUsuario;
 
+import BaseDatos.UsuariosRegistrados;
+import javax.swing.JOptionPane;
+
 
 public class Profesor extends Persona{
     
@@ -29,6 +32,20 @@ public class Profesor extends Persona{
 
     public void setYear(int year) {
         this.year = year;
+    }
+    
+    public void eliminarProfesor(){
+        try {
+            int indiceProfesor = 0;
+            for (Profesor i : UsuariosRegistrados.getListaProfesRegistrados()) {
+                if (i.getPassword().equals(this.getPassword())) {
+                    indiceProfesor = UsuariosRegistrados.getListaProfesRegistrados().indexOf(i);
+                }
+            }
+            UsuariosRegistrados.getListaEstudiantesRegistrados().remove(indiceProfesor);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error eliminado profesor");
+        }
     }
     
 }
