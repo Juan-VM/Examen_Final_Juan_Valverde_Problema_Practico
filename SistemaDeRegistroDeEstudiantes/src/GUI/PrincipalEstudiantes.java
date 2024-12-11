@@ -8,12 +8,15 @@ import javax.swing.table.DefaultTableModel;
 
 public class PrincipalEstudiantes extends javax.swing.JFrame {
 
+    
+    boolean estado = false;
     Estudiante estudianteActual;
     DefaultTableModel modelo = new DefaultTableModel();
+    
     public PrincipalEstudiantes() {
+        
     }
-    
-    
+
     public PrincipalEstudiantes(int indiceEstudiante) {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -54,6 +57,7 @@ public class PrincipalEstudiantes extends javax.swing.JFrame {
         txtNombre = new javax.swing.JTextField();
         txtEdad = new javax.swing.JTextField();
         txtUser = new javax.swing.JTextField();
+        btnMostrar = new javax.swing.JButton();
         panelVerEstudiantes = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaEstudiantes = new javax.swing.JTable();
@@ -161,7 +165,7 @@ public class PrincipalEstudiantes extends javax.swing.JFrame {
         txtPassword.setForeground(new java.awt.Color(51, 51, 51));
         txtPassword.setText("password");
         txtPassword.setBorder(null);
-        panelVerDatos.add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 400, 580, 50));
+        panelVerDatos.add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 400, 510, 50));
 
         txtCarrera.setEditable(false);
         txtCarrera.setBackground(new java.awt.Color(255, 255, 204));
@@ -194,6 +198,17 @@ public class PrincipalEstudiantes extends javax.swing.JFrame {
         txtUser.setText("user");
         txtUser.setBorder(null);
         panelVerDatos.add(txtUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 280, 630, 50));
+
+        btnMostrar.setBackground(new java.awt.Color(102, 102, 0));
+        btnMostrar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnMostrar.setForeground(new java.awt.Color(255, 255, 255));
+        btnMostrar.setText("VER");
+        btnMostrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMostrarActionPerformed(evt);
+            }
+        });
+        panelVerDatos.add(btnMostrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 400, 140, 50));
 
         pizarraOpciones.addTab("tab2", panelVerDatos);
 
@@ -246,6 +261,7 @@ public class PrincipalEstudiantes extends javax.swing.JFrame {
 
     private void btnVerDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerDatosActionPerformed
         jblUbicacion.setText("MIS DATOS");
+        estado = false;
         pizarraOpciones.setSelectedIndex(1);
         txtNombre.setText(estudianteActual.getNombreCompleto());
         txtEdad.setText(estudianteActual.getEdad()+" años");
@@ -282,6 +298,18 @@ public class PrincipalEstudiantes extends javax.swing.JFrame {
         pizarraOpciones.setSelectedIndex(0);
         jblUbicacion.setText("ESTUDIANTES");
     }//GEN-LAST:event_btnAtrasVerEstudiantesActionPerformed
+
+    private void btnMostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMostrarActionPerformed
+        if(estado == false){ //password oculta
+            txtPassword.setEchoChar( (char) 0);
+            estado = true;
+            btnMostrar.setText("OCULTAR");
+        }else{
+            txtPassword.setEchoChar('*');
+            estado = false;
+            btnMostrar.setText("VER");
+        }
+    }//GEN-LAST:event_btnMostrarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -323,6 +351,7 @@ public class PrincipalEstudiantes extends javax.swing.JFrame {
     private javax.swing.JButton btnAtrasInicio;
     private javax.swing.JButton btnAtrasVerDatos;
     private javax.swing.JButton btnAtrasVerEstudiantes;
+    private javax.swing.JButton btnMostrar;
     private javax.swing.JButton btnVerDatos;
     private javax.swing.JButton btnVerEstudiantes;
     private javax.swing.JPanel jPanel2;

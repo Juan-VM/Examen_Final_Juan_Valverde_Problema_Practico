@@ -11,7 +11,8 @@ public class PrincipalAdministradores extends javax.swing.JFrame {
     int indiceAdmin;
     DefaultTableModel modeloRegistrados = new DefaultTableModel();
     DefaultTableModel modeloEliminar = new DefaultTableModel();
-
+    boolean estado = false;
+    
     public PrincipalAdministradores() {
     }
 
@@ -138,6 +139,7 @@ public class PrincipalAdministradores extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         btnAgregarEstudiante = new javax.swing.JButton();
         jblAlerta = new javax.swing.JLabel();
+        btnMostrar = new javax.swing.JButton();
         panelVisualizar = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaEstudiantesRegistrados = new javax.swing.JTable();
@@ -258,12 +260,12 @@ public class PrincipalAdministradores extends javax.swing.JFrame {
         txtPassword.setBackground(new java.awt.Color(204, 204, 204));
         txtPassword.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         txtPassword.setForeground(new java.awt.Color(51, 51, 51));
-        panelAgregar.add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 470, 600, 50));
+        panelAgregar.add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 460, 600, 60));
 
         txtNombre.setBackground(new java.awt.Color(204, 204, 204));
         txtNombre.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         txtNombre.setForeground(new java.awt.Color(51, 51, 51));
-        panelAgregar.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 200, 600, 50));
+        panelAgregar.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 190, 600, -1));
 
         txtEdad.setBackground(new java.awt.Color(204, 204, 204));
         txtEdad.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
@@ -273,12 +275,12 @@ public class PrincipalAdministradores extends javax.swing.JFrame {
                 txtEdadKeyTyped(evt);
             }
         });
-        panelAgregar.add(txtEdad, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 290, 600, 50));
+        panelAgregar.add(txtEdad, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 280, 600, 60));
 
         txtUser.setBackground(new java.awt.Color(204, 204, 204));
         txtUser.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         txtUser.setForeground(new java.awt.Color(51, 51, 51));
-        panelAgregar.add(txtUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 380, 600, 50));
+        panelAgregar.add(txtUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 370, 600, 60));
 
         cbCarrera.setBackground(new java.awt.Color(204, 204, 204));
         cbCarrera.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
@@ -308,6 +310,17 @@ public class PrincipalAdministradores extends javax.swing.JFrame {
         jblAlerta.setForeground(new java.awt.Color(255, 102, 102));
         jblAlerta.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         panelAgregar.add(jblAlerta, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 300, 200, 30));
+
+        btnMostrar.setBackground(new java.awt.Color(102, 102, 0));
+        btnMostrar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnMostrar.setForeground(new java.awt.Color(255, 255, 255));
+        btnMostrar.setText("VER");
+        btnMostrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMostrarActionPerformed(evt);
+            }
+        });
+        panelAgregar.add(btnMostrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 460, 140, 60));
 
         pizarraOpciones.addTab("tab2", panelAgregar);
 
@@ -417,6 +430,7 @@ public class PrincipalAdministradores extends javax.swing.JFrame {
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         textosPorDefecto();
+        estado = false;
         pizarraOpciones.setSelectedIndex(1);
         jblUbicacion.setText("AGREGAR ESTUDIANTE");
     }//GEN-LAST:event_btnAgregarActionPerformed
@@ -491,6 +505,18 @@ public class PrincipalAdministradores extends javax.swing.JFrame {
         jblUbicacion.setText("ADMINISTRADORES");
     }//GEN-LAST:event_btnAtrasEliminarActionPerformed
 
+    private void btnMostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMostrarActionPerformed
+        if(estado == false){ //password oculta
+            txtPassword.setEchoChar( (char) 0);
+            estado = true;
+            btnMostrar.setText("OCULTAR");
+        }else{
+            txtPassword.setEchoChar('*');
+            estado = false;
+            btnMostrar.setText("VER");
+        }
+    }//GEN-LAST:event_btnMostrarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -537,6 +563,7 @@ public class PrincipalAdministradores extends javax.swing.JFrame {
     private javax.swing.JButton btnAtrasVisualizar;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnEliminarEstudiante;
+    private javax.swing.JButton btnMostrar;
     private javax.swing.JButton btnVerDatos;
     private javax.swing.JButton btnVisualizar;
     private javax.swing.JComboBox<String> cbCarrera;

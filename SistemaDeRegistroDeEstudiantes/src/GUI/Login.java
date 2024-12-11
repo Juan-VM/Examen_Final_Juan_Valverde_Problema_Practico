@@ -7,7 +7,9 @@ import RolesUsuario.Estudiante;
 import javax.swing.JOptionPane;
 
 public class Login extends javax.swing.JFrame {
-
+    
+    boolean estado = false; //Para ver o ocultar el password.
+    
     public Login() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -117,6 +119,7 @@ public class Login extends javax.swing.JFrame {
         lblUser = new javax.swing.JLabel();
         txtPassword = new javax.swing.JPasswordField();
         lblInicioSesion = new javax.swing.JLabel();
+        btnMostrar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -163,6 +166,17 @@ public class Login extends javax.swing.JFrame {
         lblInicioSesion.setText("INICIO SESION");
         background.add(lblInicioSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 40, -1, -1));
 
+        btnMostrar.setBackground(new java.awt.Color(102, 102, 0));
+        btnMostrar.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        btnMostrar.setForeground(new java.awt.Color(255, 255, 255));
+        btnMostrar.setText("VER");
+        btnMostrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMostrarActionPerformed(evt);
+            }
+        });
+        background.add(btnMostrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 430, 160, 60));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -180,6 +194,18 @@ public class Login extends javax.swing.JFrame {
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
         validarDatos(validarEspaciosRellenos());
     }//GEN-LAST:event_btnEntrarActionPerformed
+
+    private void btnMostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMostrarActionPerformed
+        if(estado == false){ //password oculta
+            txtPassword.setEchoChar( (char) 0);
+            estado = true;
+            btnMostrar.setText("OCULTAR");
+        }else{
+            txtPassword.setEchoChar('*');
+            estado = false;
+            btnMostrar.setText("VER");
+        }
+    }//GEN-LAST:event_btnMostrarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -221,6 +247,7 @@ public class Login extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel background;
     private javax.swing.JButton btnEntrar;
+    private javax.swing.JButton btnMostrar;
     private javax.swing.JLabel lblInicioSesion;
     private javax.swing.JLabel lblPass;
     private javax.swing.JLabel lblUser;
