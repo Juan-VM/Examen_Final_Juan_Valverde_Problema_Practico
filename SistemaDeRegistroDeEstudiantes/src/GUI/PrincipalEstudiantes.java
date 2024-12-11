@@ -3,9 +3,16 @@ package GUI;
 
 public class PrincipalEstudiantes extends javax.swing.JFrame {
 
-    
+    int indiceAdmin;
+
     public PrincipalEstudiantes() {
+    }
+    
+    
+    public PrincipalEstudiantes(int indiceAdmin) {
         initComponents();
+        this.setLocationRelativeTo(null);
+        this.indiceAdmin = indiceAdmin;
     }
 
     /**

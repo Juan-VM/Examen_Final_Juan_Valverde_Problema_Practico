@@ -7,11 +7,13 @@ public class Profesor extends Persona{
     private String nombreCurso;
     private int year;
 
-    public Profesor(String nombreCurso, int year, String nombreCompleto, int edad) {
-        super(nombreCompleto, edad);
+    public Profesor(String nombreCurso, int year, String nombreCompleto, int edad, String usuario, String password, String rol) {
+        super(nombreCompleto, edad, usuario, password, rol);
         this.nombreCurso = nombreCurso;
         this.year = year;
     }
+
+    
 
     public String getNombreCurso() {
         return nombreCurso;

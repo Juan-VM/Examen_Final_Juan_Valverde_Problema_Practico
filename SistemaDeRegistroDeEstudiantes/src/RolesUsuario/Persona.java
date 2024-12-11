@@ -1,12 +1,15 @@
 
 package RolesUsuario;
 
+import Usuario.Usuario;
 
-public class Persona {
+
+public class Persona extends Usuario{
     private String nombreCompleto;
     private int edad;
 
-    public Persona(String nombreCompleto, int edad) {
+    public Persona(String nombreCompleto, int edad, String usuario, String password, String rol) {
+        super(usuario, password, rol);
         this.nombreCompleto = nombreCompleto;
         this.edad = edad;
     }
