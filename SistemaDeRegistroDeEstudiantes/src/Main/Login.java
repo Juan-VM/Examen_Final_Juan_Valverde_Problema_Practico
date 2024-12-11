@@ -1,7 +1,9 @@
-package GUI;
+package Main;
 
 import BaseDatos.DatosUnicosUsados;
 import BaseDatos.UsuariosRegistrados;
+import GUI.PrincipalAdministradores;
+import GUI.PrincipalEstudiantes;
 import RolesUsuario.Administrador;
 import RolesUsuario.Estudiante;
 import javax.swing.JOptionPane;
@@ -17,21 +19,24 @@ public class Login extends javax.swing.JFrame {
     }
     
     public static void crearUsuariosPreestablecidos(){
-        //Se ejecuta una sola vez en el main.
+        //Se ejecuta una sola vez en el main para evitar duplicados.
 
-        //Estudiantes:
+        //Estudiantes agregados por defecto:
+        //            Constructor de Estudiante( carrera, nombreCompleto, edad, usuario, password, rol);
         Estudiante estudiante1 = new Estudiante("Informatica", "Juan Valverde Mora", 18, "Juan", "12345678", "Estudiante");
         Estudiante estudiante2 = new Estudiante("Electronica", "Adrian Mora", 20, "Adri", "helloworld", "Estudiante");
 
         UsuariosRegistrados.getListaEstudiantesRegistrados().add(estudiante1);
         UsuariosRegistrados.getListaEstudiantesRegistrados().add(estudiante2);
 
-        //Administrador
+        //Administrador agregado por defecto:
+        //         Constructor de Administrador( NombreCompleto, edad, usuario, password, rol);
         Administrador admin = new Administrador("Rodolfo Diaz", 34, "Fofo", "bueno123", "Administrador");
 
         UsuariosRegistrados.getListaAdminsRegistrados().add(admin);
         
-        //agregar password a passwords usadas
+        
+        //agregar password a passwords en uso
         DatosUnicosUsados.getPasswordsEnUso().add(estudiante1.getPassword());
         DatosUnicosUsados.getPasswordsEnUso().add(estudiante2.getPassword());
         DatosUnicosUsados.getPasswordsEnUso().add(admin.getPassword());

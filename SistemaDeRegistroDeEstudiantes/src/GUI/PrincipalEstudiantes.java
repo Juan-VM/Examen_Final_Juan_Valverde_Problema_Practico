@@ -1,6 +1,7 @@
 
 package GUI;
 
+import Main.Login;
 import BaseDatos.UsuariosRegistrados;
 import RolesUsuario.Estudiante;
 import javax.swing.JOptionPane;
