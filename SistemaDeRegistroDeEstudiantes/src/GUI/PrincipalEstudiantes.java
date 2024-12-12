@@ -260,6 +260,7 @@ public class PrincipalEstudiantes extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    //Le agrega texto a los txts que representan los datos del estudiante, con los datos del estudiante.
     private void btnVerDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerDatosActionPerformed
         jblUbicacion.setText("MIS DATOS");
         estado = false;
@@ -282,6 +283,8 @@ public class PrincipalEstudiantes extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnAtrasInicioActionPerformed
 
+    
+    //Llena la tabla de estudiantes con todos los estudiantes que hay registrados en el ArrayList estudiantesRegistrados.
     private void btnVerEstudiantesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerEstudiantesActionPerformed
         pizarraOpciones.setSelectedIndex(2);
         jblUbicacion.setText("ESTUDIANTES REGISTRADOS");
@@ -300,6 +303,7 @@ public class PrincipalEstudiantes extends javax.swing.JFrame {
         jblUbicacion.setText("ESTUDIANTES");
     }//GEN-LAST:event_btnAtrasVerEstudiantesActionPerformed
 
+    //Muestra o oculta el password.
     private void btnMostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMostrarActionPerformed
         if(estado == false){ //password oculta
             txtPassword.setEchoChar( (char) 0);

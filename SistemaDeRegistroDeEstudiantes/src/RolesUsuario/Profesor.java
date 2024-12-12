@@ -34,6 +34,7 @@ public class Profesor extends Persona{
         this.year = year;
     }
     
+    //Busca en los profesRegistrados el indice de la lista que coincida con este usuario, y luego lo remueve de la lista.
     public void eliminarProfesor(){
         try {
             int indiceProfesor = 0;

@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 public class DatosUnicosUsados {
     
+    //Almacena los passwords que estan en uso.s
     public static ArrayList<String> passwordsEnUso = new ArrayList<>();
    
     

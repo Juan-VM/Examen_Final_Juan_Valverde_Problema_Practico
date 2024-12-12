@@ -20,6 +20,7 @@ public class Estudiante extends Persona {
         this.carrera = carrera;
     }
 
+    //Busca en los estudantesRegistrados el indice de la lista que coincida con este usuario, y luego lo remueve de la lista.
     public void eliminarEstudiante() {
         try {
             int indiceEstuduante = 0;

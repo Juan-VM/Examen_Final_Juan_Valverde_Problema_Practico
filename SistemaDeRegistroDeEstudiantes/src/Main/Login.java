@@ -18,6 +18,7 @@ public class Login extends javax.swing.JFrame {
 
     }
     
+    //Este metodo crea y agrega estudiantes y administradores hechos por defecto a la lista de usuariosRegistrados, y agrega sus passwords a la que estan en uso.
     public static void crearUsuariosPreestablecidos(){
         //Se ejecuta una sola vez en el main para evitar duplicados.
 
@@ -41,6 +42,8 @@ public class Login extends javax.swing.JFrame {
         DatosUnicosUsados.getPasswordsEnUso().add(estudiante2.getPassword());
         DatosUnicosUsados.getPasswordsEnUso().add(admin.getPassword());
     }
+    
+    //Este metodo valida que no existan espacios en blanco y retorna un valor booleano que representa si hay o no espacios sin llenar.
     public boolean validarEspaciosRellenos() {
 
         boolean espaciosLlenos = false;
@@ -61,6 +64,7 @@ public class Login extends javax.swing.JFrame {
         return espaciosLlenos;
     }
 
+    //Este metodo recibe la condicion de espaciosRellenos y si es true valida los datos ingresados, en caso de que sean correctos entra al respectivo Jframe segun el rol.
     public void validarDatos(boolean permiso) {
         if (permiso == true) {
 
@@ -200,6 +204,7 @@ public class Login extends javax.swing.JFrame {
         validarDatos(validarEspaciosRellenos());
     }//GEN-LAST:event_btnEntrarActionPerformed
 
+    //Muestra o oculta los caracteres del password.
     private void btnMostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMostrarActionPerformed
         if(estado == false){ //password oculta
             txtPassword.setEchoChar( (char) 0);

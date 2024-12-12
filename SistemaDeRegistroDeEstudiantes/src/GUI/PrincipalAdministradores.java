@@ -33,6 +33,7 @@ public class PrincipalAdministradores extends javax.swing.JFrame {
         tablaEliminar.setModel(modeloEliminar);
     }
 
+    //Establece los txts sin texto osea en blanco.
     public void textosPorDefecto() {
         txtEdad.setText("");
         txtNombre.setText("");
@@ -41,6 +42,7 @@ public class PrincipalAdministradores extends javax.swing.JFrame {
         cbCarrera.setSelectedIndex(0);
     }
 
+    //Ajusta los textos manteniendo su texto pero sin espacios en blanco al inicio y al final del String.
     public void ajustarTextos() {
         txtEdad.setText(txtEdad.getText().trim());
         txtNombre.setText(txtNombre.getText().trim());
@@ -49,6 +51,7 @@ public class PrincipalAdministradores extends javax.swing.JFrame {
         cbCarrera.setSelectedIndex(0);
     }
 
+    //Valida que todos los txts esten llenos y que no sean espacios en blanco, y retorna un boolean segun la condicion de los espacios en blanco.
     public boolean validarEspaciosEnBlanco() {
         boolean espaciosLLenos = false;
         try {
@@ -65,6 +68,7 @@ public class PrincipalAdministradores extends javax.swing.JFrame {
         return espaciosLLenos;
     }
 
+    //Valida que el password no este en uso y que tenga 8 caracteres y retorna un boolean segun la condicion del password.
     public boolean validarPassword() {
         boolean passwordValida = false;
 
@@ -87,6 +91,8 @@ public class PrincipalAdministradores extends javax.swing.JFrame {
         return passwordValida;
     }
 
+    
+    //Se ejecuta solo si los espacios estan llenos, y si el password es valido. Si son validos lo que hace es crear y agregar al estudiante a la lista de registrados.
     public void agregarEstudiante(boolean espaciosLlenos, boolean passwordValida) {
 
         try {
@@ -414,7 +420,8 @@ public class PrincipalAdministradores extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    //Llena la tabla de los estudiantes que se pueden eliminar, tomandolos de el ArrayList usuariosRegistrados.
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         pizarraOpciones.setSelectedIndex(3);
         jblUbicacion.setText("ELIMINAR ESTUDIANTE");
@@ -436,6 +443,7 @@ public class PrincipalAdministradores extends javax.swing.JFrame {
         jblUbicacion.setText("AGREGAR ESTUDIANTE");
     }//GEN-LAST:event_btnAgregarActionPerformed
 
+    //Llena la tabla de los estudiantes registrados, tomandolos de el ArrayList usuariosRegistrados.
     private void btnVisualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVisualizarActionPerformed
         pizarraOpciones.setSelectedIndex(2);
         jblUbicacion.setText("VISUALIZAR ESTUDIANTES");
@@ -458,6 +466,8 @@ public class PrincipalAdministradores extends javax.swing.JFrame {
         agregarEstudiante(validarEspaciosEnBlanco(), validarPassword());
     }//GEN-LAST:event_btnAgregarEstudianteActionPerformed
 
+    
+    //Valida que en el txtEdad solo se pueda escribir numeros.
     private void txtEdadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEdadKeyTyped
         char tecla = evt.getKeyChar();
 
@@ -480,6 +490,8 @@ public class PrincipalAdministradores extends javax.swing.JFrame {
         jblUbicacion.setText("ADMINISTRADORES");
     }//GEN-LAST:event_btnAtrasVisualizarActionPerformed
 
+    
+    //Segun la fila seleccionada de la tabla remueve al estudiante de la lista de estudiantesRegistrados.
     private void btnEliminarEstudianteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarEstudianteActionPerformed
         try {
             if (tablaEliminar.getSelectedRow() >= 0) {
@@ -506,6 +518,7 @@ public class PrincipalAdministradores extends javax.swing.JFrame {
         jblUbicacion.setText("ADMINISTRADORES");
     }//GEN-LAST:event_btnAtrasEliminarActionPerformed
 
+    //Oculta o muestra el password.
     private void btnMostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMostrarActionPerformed
         if(estado == false){ //password oculta
             txtPassword.setEchoChar( (char) 0);

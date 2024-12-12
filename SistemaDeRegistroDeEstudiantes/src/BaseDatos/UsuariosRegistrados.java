@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 public class UsuariosRegistrados {
     
+    //Almacenan los estudiantes, administradores y profesores registrados en el programa.
     public static ArrayList<Estudiante> listaEstudiantesRegistrados = new ArrayList<>();
     public static ArrayList<Administrador> listaAdminsRegistrados = new ArrayList<>();
     public static ArrayList<Profesor> listaProfesRegistrados = new ArrayList<>();
